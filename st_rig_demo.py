@@ -103,7 +103,7 @@ if mode == "web":
                 else:
                     draw_combined_img_copy.rectangle(coordinate, outline="green", width=5)
 
-            st.image(cropped_img, use_column_width=True)
+            st.image(cropped_img, use_container_width=True)
             
 
 
@@ -198,6 +198,6 @@ else:
         cropped_img.save(save_path)
         st.success(f"Image saved to {save_path}")
 
-    st.image(cropped_img, use_column_width=True)
+    st.image(cropped_img, use_container_width=True)
 
 
