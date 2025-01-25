@@ -2,16 +2,11 @@
 # Standard library imports
 import os
 import json
-from datetime import datetime
 
 # Third party imports
 import streamlit as st
-import numpy as np
-import cv2
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
-# Local imports
-from pkg.train_main import st_train_patchcore
 
 
 st.set_page_config(
