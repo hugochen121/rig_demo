@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 
 st.set_page_config(
     page_title="Vangeles - Rig Demo Pipeline",
-    page_icon="♚",  # 💵🔨⚒🛠⛏🔬⚙️🪙✢✣✤✥♚♛🇹🇼🛡
+    page_icon="⛏",  # 💵🔨⚒🛠⛏🔬⚙️🪙✢✣✤✥♚♛🇹🇼🛡
     layout="wide"   
 )
 
