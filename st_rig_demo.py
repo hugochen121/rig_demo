@@ -11,8 +11,8 @@ from PIL import Image, ImageDraw
 
 st.set_page_config(
     page_title="Vangeles - Rig Demo Pipeline",
-    page_icon="⚒",  # 💵🔨⚒🛠⛏🔬⚙️🪙✢✣✤✥♚♛🇹🇼🛡
-    layout="wide"    # Set the layout to wide mode
+    page_icon="♛",  # 💵🔨⚒🛠⛏🔬⚙️🪙✢✣✤✥♚♛🇹🇼🛡
+    layout="wide"   
 )
 
 def convert_label_to_boxes(label):
@@ -98,7 +98,6 @@ if mode == "web":
                 draw_combined_img_copy = ImageDraw.Draw(cropped_img)
                     
                 if (col, row) in selected_coordinate_list:
-                    # 
                     draw_combined_img_copy.rectangle(coordinate, outline="red", width=5)
                 else:
                     draw_combined_img_copy.rectangle(coordinate, outline="green", width=5)
@@ -112,92 +111,4 @@ if mode == "web":
 
 else:
 
-    # Read left and right json files from rig_demo folders
-    left_json_path = "rig_demo/left"
-    right_json_path = "rig_demo/right"
-
-    # Get list of json files
-    left_jsons = [f for f in os.listdir(left_json_path) if f.endswith('.json')]
-    right_jsons = [f for f in os.listdir(right_json_path) if f.endswith('.json')]
-
-    if left_jsons:
-        for json_file in left_jsons:
-            with open(os.path.join(left_json_path, json_file), 'r') as f:
-                left_data = json.load(f)
-                
-    if right_jsons:
-        for json_file in right_jsons:
-            with open(os.path.join(right_json_path, json_file), 'r') as f:
-                right_data = json.load(f)
-                
-    if not left_jsons and not right_jsons:
-        st.sidebar.warning("No JSON files found in rig_demo folders")
-
-    left_crop_label_whole = convert_label_to_whole_image_crop(left_data)
-    right_crop_label_whole = convert_label_to_whole_image_crop(right_data)
-
-    left_crop_label_list, left_coordinate_list = convert_label_to_boxes(left_data)
-    right_crop_label_list, right_coordinate_list = convert_label_to_boxes(right_data) 
-
-    # Move controls to sidebar
-    side = st.sidebar.selectbox("Select side", ["left", "right"])
-    folder_path = f"rig_demo/{side}"
-
-
-    # Get list of image files in selected folder and sort by name
-    image_files = sorted([f for f in os.listdir(folder_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])
-
-    if not image_files:
-        st.sidebar.warning(f"No image files found in {folder_path}")
-    else:
-        # Let user select an image file
-        selected_image = st.sidebar.selectbox("Select image", image_files)
-        
-        # Load the selected image
-        img = Image.open(os.path.join(folder_path, selected_image))
-
-
-
-
-
-
-    if side == "left":
-        cropped_img = img.crop(left_crop_label_whole)
-        cropped_label_list = left_crop_label_list   
-        coordinate_list = left_coordinate_list
-    elif side == "right":
-        cropped_img = img.crop(right_crop_label_whole)
-        cropped_label_list = right_crop_label_list
-        coordinate_list = right_coordinate_list
-
-
-    selected_coordinate_list = st.sidebar.multiselect("Select coordinates", coordinate_list)
-
-    for box in cropped_label_list:
-        # (box[0], box[2]), (box[1], box[3]) = (xmin,ymin), (xmax,ymax)
-        coordinate = (box[0], box[2], box[1], box[3])
-        row, col = box[4], box[5]
-
-        draw_combined_img_copy = ImageDraw.Draw(cropped_img)
-            
-        if (col, row) in selected_coordinate_list:
-            # 
-            draw_combined_img_copy.rectangle(coordinate, outline="red", width=5)
-        else:
-            draw_combined_img_copy.rectangle(coordinate, outline="green", width=5)
-
-    # Create save button
-    if st.sidebar.button("Save Image"):
-        # Create result directory if it doesn't exist
-        result_dir = f"rig_demo/result/{side}"
-        if not os.path.exists(result_dir):
-            os.makedirs(result_dir)
-        
-        # Save image
-        save_path = os.path.join(result_dir, selected_image)
-        cropped_img.save(save_path)
-        st.success(f"Image saved to {save_path}")
-
-    st.image(cropped_img, use_container_width=True)
-
-
+    pass
