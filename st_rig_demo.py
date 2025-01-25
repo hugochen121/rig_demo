@@ -53,7 +53,7 @@ def convert_label_to_whole_image_crop(label):
 
 
 # Initialize sidebar in expanded state
-st.sidebar.markdown("## Control Panel")
+st.sidebar.markdown("## 過一關用的")
 mode = st.sidebar.selectbox("Select mode", ["web", "local"])
 st.sidebar.markdown("---")
 
