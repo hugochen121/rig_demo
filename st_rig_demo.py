@@ -38,7 +38,7 @@ def convert_label_to_boxes(label):
     return boxes, coordinate_list
 
 def convert_label_to_whole_image_crop(label):
-    x, y = label['x'], label['y']
+    x, y = 0,0#label['x'], label['y']
     w, h = label['w'], label['h']
     col_num = label['col_num']
     row_num = label['row_num'] 
